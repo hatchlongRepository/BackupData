@@ -1,0 +1,38 @@
+*{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    padding: 5px;
+}
+
+.design{
+    width: 20%;
+    font-size: 20px;
+    margin-top: 5%;
+    padding: 20px;
+    gap: 10px;
+}
+.design ul{
+    text-decoration: none;
+    color: gray;
+    
+}
+.design li a{
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    margin: 5px 10px;
+    line-height: 50px;
+    cursor: pointer;
+    color: grey;
+
+}
+li:hover{
+    background: #e5e3ec;
+}
+.design li a:active{
+    background: #e5e3ec;
+}

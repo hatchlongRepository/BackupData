@@ -1,9 +1,11 @@
 import React from 'react'
 import Button from '@mui/material/Button';
+import CustomNav from './CustomNav';
 const BusinessInfo = () => {
     return (
         <>
-            <div style={{ marginLeft: '30px' }}>
+        <CustomNav/>
+            <div style={{marginLeft:'350px',marginTop:'-300px' }}>
                 <h4 style={{ textAlign: 'left', marginTop: '5px', color: 'grey' }}>Business Information </h4>
                 <div class='row'>
                     <div class='col-sm-6'>

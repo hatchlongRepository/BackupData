@@ -1,0 +1,57 @@
+*{
+    
+    list-style-type: none;
+}
+nav{
+    position: absolute;
+    top: 40px;
+    left:50px;
+    width: 290px;
+    background: #e5e3ec;
+    line-height: 40px;
+    padding: 8px 25px;
+}
+nav ul ul{
+    position: absolute;
+    display: none;
+}
+[id^=btn]:checked + ul{
+    display: block;
+}
+nav ul ul ul{
+    position: absolute;
+    display: none;
+}
+
+nav label{
+    cursor: pointer;
+    display: block;
+    font-size: 19px;
+}
+nav .menu::before{
+    position: absolute;
+    content: '';
+}
+button span{
+    line-height: 35px;
+}
+nav ul li a{
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+}
+nav ul li label{
+    font-size: 18px;
+}
+nav ul ul{
+    position: static;
+}
+nav ul ul ul{
+    position: static;
+}
+nav ul ul li{
+    line-height: 30px;
+}
+.check-btn{
+    display: none;
+}

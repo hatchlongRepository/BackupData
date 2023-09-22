@@ -1,10 +1,13 @@
 import React from 'react'
 import Button from '@mui/material/Button';
+import CustomNav from './CustomNav';
 
 
 const UpgradePlan = () => {
     return (
-        <div class='row'>
+        <>
+        <CustomNav/>
+        <div class='row' style={{marginLeft:'350px',marginTop:'-300px'}}>
             <h4 style={{ textAlign: 'left', marginTop: '5px',marginLeft:'20px',color:'grey' }}>Upgrade Plans </h4>
             <div class='col-md-2'>
                 <label style={{ fontSize: '16px' ,marginLeft:'20px', marginTop: '20px', color: 'grey'}}> Plan :</label><br/>
@@ -34,6 +37,7 @@ const UpgradePlan = () => {
             </select><br />
             </div>
         </div>
+        </>
     )
 }
 

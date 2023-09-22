@@ -1,11 +1,13 @@
 import Button from '@mui/material/Button';
 
 import React from 'react'
+import CustomNav from './CustomNav';
 
 const PersonalInfo = () => {
     return (
         <>
-            <div style={{marginLeft:'20px'}} >
+        <CustomNav/>
+            <div style={{marginLeft:'350px',marginTop:'-300px'}} >
                 <h4 style={{ textAlign: 'left', marginTop: '5px', color: "grey" }}>Personal Information</h4>
                 <div class='row'>
                     <div class='col-sm-6'>

@@ -1,63 +1,66 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
+import { useParams} from 'react-router-dom';
 
-const StoreInfo = () => {
+const EditData = () => {
+    
+//let navigate=useNavigate();
 
-    const [st_name, setName] = useState("");
-    const [st_man_name, setMname] = useState("");
-    const [st_email, setEmail] = useState("");
-    const [st_contact, setContact] = useState("");
-    const [st_store, setStore] = useState("");
-    const [st_po_box, setBox] = useState("");
-    const [st_province, setProvince] = useState("");
-    const [st_district, setDistrict] = useState("");
-    const [st_city, setCity] = useState("");
-    const [st_landmark, setLandmark] = useState("");
-    const [st_add1, setAddress] = useState("");
-    const [st_add2, setAdd] = useState("");
+let[st_name,setName]=useState();
+let [st_man_name,setMname]=useState();
+let [st_contact,setContact]=useState();
+let [st_store,setStore]=useState();
+let [st_email,setEmail]=useState();
+let [st_po_box,setBox]=useState();
+let [st_province,setProvince]=useState();
+let [st_district,setDistrict]=useState();
+let [st_add1,setAddress]=useState();
+let [st_city,setCity]=useState();
+let [st_landmark,setLandmark]=useState();
+let [st_add2,setAdd]=useState();
 
-    const [error,setError]=useState(null);
 
-    const addstore = async () => {
-        console.log(st_name, st_man_name, st_email, st_contact, st_store, st_po_box, st_province, st_district, st_city, st_landmark, st_add1, st_add2);
-        let result = await fetch('http://localhost:4500/addstore', {
-            method: 'post',
-            body: JSON.stringify({ st_name, st_man_name, st_email, st_contact, st_store, st_po_box, st_province, st_district, st_city, st_landmark, st_add1, st_add2 }),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
-        result = await result.json();
-        if (result.Status) {
-            alert("Data saved Successfully")
-            window.location.reload(false); 
+let params=useParams();
+
+let getStore = async () => {
+    let result = await fetch(`http://127.0.0.1:4500/storedata/${params.id}`);
+    result = await result.json();
+    setName(result.st_name); setMname(result.st_man_name); setContact(result.st_contact); setStore(result.st_store); setEmail(result.st_email);
+    setBox(result.st_po_box); setProvince(result.st_province); setDistrict(result.st_district); setAddress(result.st_add1);
+    setCity(result.st_city);setLandmark(result.st_landmark);setAdd(result.st_add2);
+}
+useEffect(() => {
+    getStore();
+}, []);
+
+let updatestore=async()=>{
+    let result=await fetch(`http://localhost:4500/updatestore/${params.id}`,{
+        method:'put',
+        body:JSON.stringify({ st_name ,st_man_name ,st_contact , st_store , st_email , st_po_box , st_province , st_district , st_add1 , st_add2 , st_city , st_landmark}),
+        headers: {
+            'Content-Type': 'application/json'
         }
-        if (result.Required) {
-            alert("All field are required");
-        }
+    });
+    result=await result.json();
+    if(result.Success){
+        alert("Data Updated Successfully");
+    }
+    if(result.Status){
+        alert("Failed");
 
     }
+     
+}
 
-    const handle=(event)=>{
-        if(event.target.value=" "){
-            console.log("All Field Mandatory");
-        }
-        else{
-            setError(null);
-            console.log("Successfully");
-        }
-    }
-
-    return (
-        <>
-            <h3 style={{ margin: '20px' }}>STORE/<span style={{ fontSize: '17px', color: 'grey' }}>ADD STORE</span></h3>
+  return (
+    <>
+            <h3 style={{ margin: '20px' }}>STORE/<span style={{ fontSize: '17px', color: 'grey' }}>UPDATE STORE</span></h3>
             <hr />
             <div style={{ marginLeft: '20px' }}>
-                <form onFocus={handle}>
+                <form >
                     <h4 style={{ textAlign: 'left', marginTop: '5px', color: "grey" }}>Store Information</h4>
                     <div class='row' >
                         <div class='col-sm-6'>
-                            {error && <h2 style={{color:'red'}}>{error}</h2>}
                             <label style={{ fontSize: '16px', color: 'grey', marginTop: '5px' }}>Store Name *</label><br />
                             <input type="text" required placeholder='Enter Store Name' value={st_name} onChange={(e) => setName(e.target.value)} style={{ height: '40px', width: '450px', borderRadius: '5px', border: '1px solid grey' }} /><br />
 
@@ -87,10 +90,11 @@ const StoreInfo = () => {
                             <label style={{ fontSize: '16px', color: 'grey', marginTop: '5px' }}>Address 1 *</label><br />
                             <input type="text" required placeholder='Enter Address 1' value={st_add1} onChange={(e) => setAddress(e.target.value)} style={{ height: '40px', width: '450px', borderRadius: '5px', border: '1px solid grey' }} /><br />
 
-                            <Button variant='contained' onClick={addstore} style={{ marginTop: '20px', background: '#00ACFF', height: '42px' }}>Save</Button>
+                            <Button variant='contained' onClick={updatestore} style={{ marginTop: '20px', background: '#00ACFF', height: '42px' }}>Update</Button>
                         </div>
                         <div class='col-sm-6'>
                             <label style={{ fontSize: '16px', color: 'grey', marginTop: '3px' }}>Store Type </label><br />
+                            
                             <select value={st_store} onChange={(e) => setStore(e.target.value)} style={{ height: '40px', color: 'grey', width: '450px', borderRadius: '5px', border: '1px solid grey' }}>
                                 <option>Select Type</option>
                                 <option value="Store">Store</option>
@@ -116,7 +120,8 @@ const StoreInfo = () => {
                 </form>
             </div>
         </>
-    )
+    
+  )
 }
 
-export default StoreInfo
+export default EditData
